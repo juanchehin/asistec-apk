@@ -41,6 +41,7 @@ export class LoginPage implements OnInit {
             this.router.navigateByUrl("personal");
         } else {
           this.showAlert('Error de logueo');
+          loadingEl.dismiss();
           // authObs = this.authService.signup(email, password);
         }
 
