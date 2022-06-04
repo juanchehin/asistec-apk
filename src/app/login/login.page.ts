@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Form } from '@angular/forms';
+import { Form, NgForm } from '@angular/forms';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth-service.service';
@@ -23,16 +23,27 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
-  authenticate(email: string, password: string) {
+  authenticate(user: string, password: string) {
     this.isLoading = true;
 
     this.loadingCtrl
       .create({ keyboardClose: true, message: 'Logging in...' })
       .then(loadingEl => {
         loadingEl.present();
-        let authObs: Observable<any>;
-        if (this.isLogin) {
-          // authObs = this.authService.login(email, password);
+        // let authObs: Observable<any>;
+        // let authObs: boolean;
+
+        if (this.authService.login(user, password)) {
+            this.isLoading = false;
+            loadingEl.dismiss();
+            this.router.navigateByUrl("/personal");
+        } else {
+          this.showAlert('Error de logueo');
+          // authObs = this.authService.signup(email, password);
+        }
+
+        /*if (this.isLogin) {
+          authObs = this.authService.login(email, password);
         } else {
           this.showAlert('Error de logueo');
           // authObs = this.authService.signup(email, password);
@@ -56,7 +67,7 @@ export class LoginPage implements OnInit {
             }
             this.showAlert(message);
           }
-        );
+        );*/
       });
 
 
@@ -76,8 +87,15 @@ export class LoginPage implements OnInit {
       .then(alertEl => alertEl.present());
   }
 
-  onSubmit(f: Form){
+  onSubmit(form: NgForm) {
+    if (!form.valid) {
+      return;
+    }
+    const email = form.value.email;
+    const password = form.value.password;
 
+    this.authenticate(email, password);
+    form.reset();
   }
 
 }
