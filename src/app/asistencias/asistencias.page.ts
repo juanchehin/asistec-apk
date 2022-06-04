@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-asistencias',
   templateUrl: './asistencias.page.html',
-  styleUrls: ['./asistencias.page.scss'],
+  styleUrls: [],
 })
 export class AsistenciasPage implements OnInit {
 

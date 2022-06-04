@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Form } from '@angular/forms';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth-service.service';
@@ -31,7 +32,7 @@ export class LoginPage implements OnInit {
         loadingEl.present();
         let authObs: Observable<any>;
         if (this.isLogin) {
-          authObs = this.authService.login(email, password);
+          // authObs = this.authService.login(email, password);
         } else {
           this.showAlert('Error de logueo');
           // authObs = this.authService.signup(email, password);
@@ -73,6 +74,10 @@ export class LoginPage implements OnInit {
         buttons: ['Okay']
       })
       .then(alertEl => alertEl.present());
+  }
+
+  onSubmit(f: Form){
+
   }
 
 }
