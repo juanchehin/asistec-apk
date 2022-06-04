@@ -5,7 +5,18 @@ import { map, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment.prod';
 
 // import { Plugins } from '@capacitor/core';
-// import { Storage } from '@capacitor/Storage';
+import { Storage } from '@capacitor/Storage';
+import { User } from '../models/user.model';
+
+export interface AuthResponseData {
+  kind: string;
+  idToken: string;
+  user: string;
+  refreshToken: string;
+  localId: string;
+  expiresIn: string;
+  registered?: boolean;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -54,7 +65,7 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   autoLogin() {
-    return from(Storage.get({ key: 'authData' })).pipe(
+    /*return from(Storage.get({ key: 'authData' })).pipe(
       map((storedData: any) => {
         if (!storedData || !storedData.value) {
           return null;
@@ -69,7 +80,7 @@ export class AuthService {
         if (expirationTime <= new Date()) {
           return null;
         }
-        const user = new User(
+        const user = new Personal(
           parsedData.userId,
           parsedData.email,
           parsedData.token,
@@ -86,7 +97,7 @@ export class AuthService {
       map(user => {
         return !!user;
       })
-    );
+    );*/
   }
 
 
@@ -129,7 +140,7 @@ export class AuthService {
     );
     const user = new User(
       userData.localId,
-      userData.email,
+      userData.user,
       userData.idToken,
       expirationTime
     );
@@ -139,7 +150,7 @@ export class AuthService {
       userData.localId,
       userData.idToken,
       expirationTime.toISOString(),
-      userData.email
+      userData.user
     );
   }
 
@@ -147,13 +158,13 @@ export class AuthService {
     userId: string,
     token: string,
     tokenExpirationDate: string,
-    email: string
+    user: string
   ) {
     const data = JSON.stringify({
       userId: userId,
       token: token,
       tokenExpirationDate: tokenExpirationDate,
-      email: email
+      user: user
     });
     Storage.set({ key: 'authData', value: data });
   }
