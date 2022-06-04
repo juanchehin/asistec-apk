@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Form, NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth-service.service';
@@ -12,12 +13,13 @@ export class LoginPage implements OnInit {
 
   isLoading = false;
   isLogin = true;
-  router: any;
+  // router: any;
 
   constructor(
     private authService: AuthService,
     private loadingCtrl: LoadingController,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private router : Router
   ) { }
 
   ngOnInit() {
@@ -36,7 +38,7 @@ export class LoginPage implements OnInit {
         if (this.authService.login(user, password)) {
             this.isLoading = false;
             loadingEl.dismiss();
-            this.router.navigateByUrl("/personal");
+            this.router.navigateByUrl("personal");
         } else {
           this.showAlert('Error de logueo');
           // authObs = this.authService.signup(email, password);
@@ -91,10 +93,10 @@ export class LoginPage implements OnInit {
     if (!form.valid) {
       return;
     }
-    const email = form.value.email;
+    const user = form.value.user;
     const password = form.value.password;
 
-    this.authenticate(email, password);
+    this.authenticate(user, password);
     form.reset();
   }
 

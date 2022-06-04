@@ -101,9 +101,9 @@ export class AuthService {
   }
 
 
-  login(email: string, password: string) {
+  login(user: string, password: string) {
     // Chequear con user y pass de drive
-    if(email === environment.user && password == environment.pass)
+    if(user === environment.user && password == environment.pass)
     {
       return true;
     }
