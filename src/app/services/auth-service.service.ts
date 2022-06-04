@@ -12,7 +12,7 @@ import { environment } from '../../environments/environment.prod';
 })
 export class AuthService {
 
-  private _user = new BehaviorSubject<User>(null);
+  private _user = new BehaviorSubject<any>(null);
   private activeLogoutTimer: any;
 
   get userIsAuthenticated() {
