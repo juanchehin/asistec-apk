@@ -12,14 +12,13 @@ import { Capacitor } from '@capacitor/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  // public appPages = [
-  //   { title: 'Asistencias', url: 'Asistencias', icon: 'checkbox' },
-  //   { title: 'Personal', url: 'Personal', icon: 'people' },
-  //   { title: 'Escuelas', url: 'Escuelas', icon: 'school' },
-  // ];
+  public appPages = [
+    { title: 'Asistencias', url: 'asistencias', icon: 'checkbox' },
+    { title: 'Personal', url: 'personal', icon: 'people' },
+    { title: 'Escuelas', url: 'escuelas', icon: 'school' },
+  ];
   // public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  // public labels = [];
-  // constructor() {}
+  public labels = [];
 
   private authSub: Subscription;
   private previousAuthState = false;

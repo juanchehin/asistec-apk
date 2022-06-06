@@ -22,7 +22,15 @@ const routes: Routes = [
   {
     path: 'personal',
     loadChildren: () => import('./personal/personal.module').then( m => m.PersonalPageModule)
+  },
+  {
+    path: 'nuevo-personal',
+    loadChildren: () => import('./personal/nuevo-personal/nuevo-personal.module').then( m => m.NuevoPersonalPageModule)
+  },  {
+    path: 'escuelas',
+    loadChildren: () => import('./escuelas/escuelas.module').then( m => m.EscuelasPageModule)
   }
+
 ];
 
 @NgModule({

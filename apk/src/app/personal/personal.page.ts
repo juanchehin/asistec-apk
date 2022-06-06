@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Personal } from '../models/personal.model';
 import { PersonalService } from '../services/personal.service';
 
 @Component({
   selector: 'app-personal',
-  templateUrl: './personal.page.html',
-  styleUrls: [],
+  templateUrl: './personal.page.html'
 })
 export class PersonalPage implements OnInit {
 
@@ -13,7 +13,8 @@ export class PersonalPage implements OnInit {
   desde = 0;
 
   constructor(
-    private personalService: PersonalService
+    private personalService: PersonalService,
+    private router : Router
   ) { }
 
   ngOnInit() {
@@ -31,7 +32,7 @@ export class PersonalPage implements OnInit {
             });
   }
 
-  // ==================================================
+// ==================================================
 //  Busca un cliente por plan o por todos
 // ==================================================
 
@@ -49,5 +50,16 @@ buscar( ) {
       });
 
 }
+
+// ==================================================
+//  enrutar
+// ==================================================
+
+enrutar( ) {
+
+  this.router.navigateByUrl("nuevo-personal");
+
+}
+
 
 }

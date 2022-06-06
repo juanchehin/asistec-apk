@@ -1,0 +1,29 @@
+<!-- Solo accesible para los administradores -->
+
+<div class="container">
+    <h1 class="well">Nuevo Personal</h1>
+    <div class="col-lg-12 well">
+        <div class="row">
+            <form ngNativeValidate [formGroup]="form" (ngSubmit)="registrarPersonal()" *ngIf="form">
+                <div class="col-sm-12">
+
+                    <div class="alert alert-primary" role="alert">
+                        <div class="row">
+                            <div class="col-sm-6 form-group">
+                                <label>Apellidos</label>
+
+                                <input tabindex="1" formControlName="Apellidos" name="Apellidos" required type="text" placeholder="Apellidos..." class="form-control">
+                                <input tabindex="1" formControlName="Nombres" name="Apellidos" required type="text" placeholder="Nombres..." class="form-control">
+                                <input tabindex="1" formControlName="DNI" name="Apellidos" required type="number" placeholder="DNI..." class="form-control">
+
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-info btn-lg btn-block text-uppercase">Cargar</button>
+                    <br>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

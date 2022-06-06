@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.prod';
+import { Personal } from 'src/app/models/personal.model';
 
 const URL_SERVICIOS = environment.URL_SERVICIOS;
 
@@ -30,5 +31,16 @@ export class PersonalService {
     let url = URL_SERVICIOS + '/personal/busqueda/' + pBusqueda;
 
     return this.http.get(url);
+  }
+
+  // ======================
+  crearPersonal(personal: Personal){
+
+    let url = URL_SERVICIOS + '/personal/nuevo';
+
+    return this.http.post(
+      url,
+      personal
+      );
   }
 }
