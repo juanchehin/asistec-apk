@@ -25,6 +25,7 @@ export class AuthService {
 
   private _user = new BehaviorSubject<any>(null);
   private activeLogoutTimer: any;
+  token: any;
 
   get userIsAuthenticated() {
     return this._user.asObservable().pipe(
@@ -50,19 +51,35 @@ export class AuthService {
     );
   }
 
-  get token() {
-    return this._user.asObservable().pipe(
-      map(user => {
-        if (user) {
-          return user.token;
-        } else {
-          return null;
-        }
-      })
-    );
-  }
+  // get token() {
+  //   return this._user.asObservable().pipe(
+  //     map(user => {
+  //       if (user) {
+  //         return user.token;
+  //       } else {
+  //         return null;
+  //       }
+  //     })
+  //   );
+  // }
 
   constructor(private http: HttpClient) {}
+
+
+// ==================================================
+//        Permite saber si un usuario esta logueado
+// ==================================================
+estaLogueado() {
+
+  this.token = localStorage.getItem('token');
+
+  if ((this.token === 'undefined') || (this.token === null)) {
+    return false;
+  } else {
+    return( this.token.length > 5) ? true : false;
+
+  }
+}
 
   autoLogin() {
     /*return from(Storage.get({ key: 'authData' })).pipe(
@@ -105,6 +122,7 @@ export class AuthService {
     // Chequear con user y pass de drive
     if(user === environment.user && password == environment.pass)
     {
+      localStorage.setItem('token', 'ciidept-centro' );
       return true;
     }
     return false;

@@ -39,6 +39,7 @@ export class LoginPage implements OnInit {
             this.isLoading = false;
             loadingEl.dismiss();
             this.router.navigateByUrl("personal");
+
         } else {
           this.showAlert('Error de logueo');
           loadingEl.dismiss();

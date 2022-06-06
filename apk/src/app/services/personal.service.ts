@@ -11,6 +11,8 @@ const URL_SERVICIOS = environment.URL_SERVICIOS;
 })
 export class PersonalService {
 
+  token!: any;
+
   constructor(
     private http: HttpClient
   ) { }
@@ -43,4 +45,6 @@ export class PersonalService {
       personal
       );
   }
+
+
 }
