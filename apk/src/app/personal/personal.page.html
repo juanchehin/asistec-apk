@@ -9,7 +9,13 @@
 
 
 <ion-content>
-    <ion-searchbar></ion-searchbar>
+    <ion-searchbar id="pBusqueda">
+    </ion-searchbar>
+
+    <ion-button type="submit" color="primary" expand="block" (click)="buscar()">
+        Buscar...
+    </ion-button>
+
     <ion-list>
         <ion-item *ngFor="let persona of personal">
             {{persona.DNI}}

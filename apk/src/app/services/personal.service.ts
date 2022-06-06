@@ -14,12 +14,20 @@ export class PersonalService {
     private http: HttpClient
   ) { }
 
-
+  // ======================
   cargarPersonal(desde){
 
     desde = desde || 0;
 
     let url = URL_SERVICIOS + '/personal/listar/' + desde;
+
+    return this.http.get(url);
+  }
+
+// ======================
+  buscarPersonal(pBusqueda){
+
+    let url = URL_SERVICIOS + '/personal/busqueda/' + pBusqueda;
 
     return this.http.get(url);
   }

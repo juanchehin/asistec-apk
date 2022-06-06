@@ -24,12 +24,30 @@ export class PersonalPage implements OnInit {
 
     this.personalService.cargarPersonal( this.desde )
              .subscribe( (resp: any) => {
-              console.log('resp es : ', resp);
 
               this.personal = resp[0];
 
 
             });
   }
+
+  // ==================================================
+//  Busca un cliente por plan o por todos
+// ==================================================
+
+buscar( ) {
+
+  const inputElement: HTMLInputElement = document.getElementById('pBusqueda') as HTMLInputElement;
+  const pBusqueda: any = inputElement.value || null;
+
+
+  this.personalService.buscarPersonal( pBusqueda )
+          .subscribe( (resp: any) => {
+
+            this.personal = resp[0];
+
+      });
+
+}
 
 }
