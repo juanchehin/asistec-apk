@@ -18,7 +18,7 @@ export class AppComponent {
     { title: 'Escuelas', url: 'escuelas', icon: 'school' },
   ];
   // public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  public labels = [];
+  public labels = ['Logout'];
 
   private authSub: Subscription;
   private previousAuthState = false;

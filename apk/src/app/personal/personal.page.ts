@@ -60,6 +60,35 @@ enrutar( ) {
   this.router.navigateByUrl("nuevo-personal");
 
 }
+// ==================================================
+//  asistencia
+// ==================================================
 
+marcarAsistencia(IdPersona: any ) {
+
+  this.router.navigateByUrl("nuevo-personal");
+
+}
+
+// ==================================================
+//        Cambio de valor
+// ==================================================
+
+cambiarDesde( valor: number ) {
+
+  const desde = this.desde + valor;
+
+  // if ( desde >= this.totalClientes ) {
+  //   return;
+  // }
+
+  // if ( desde < 0 ) {
+  //   return;
+  // }
+
+  // this.desde += valor;
+  // this.cargarClientes();
+
+}
 
 }
