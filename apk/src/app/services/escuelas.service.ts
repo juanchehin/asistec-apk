@@ -19,7 +19,7 @@ export class EscuelasService {
   // ======================
   cargarEscuelas(desde){
 
-    console.log("cargarEscuelas es : ")
+
     desde = desde || 0;
 
     let url = URL_SERVICIOS + '/escuelas/listar/' + desde;

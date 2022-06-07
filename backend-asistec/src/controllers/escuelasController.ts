@@ -8,7 +8,7 @@ class EscuelasController {
 // ==================================================
 
 public async buscarEscuela(req: Request, res: Response): Promise<void> {
-    const { escuela } = req.params;
+    let escuela = req.params.pBusqueda;
 
     pool.query(`call bsp_buscar_escuela('${escuela}')`, function(err: any, result: any, fields: any){
         if(err){
