@@ -7,10 +7,10 @@ class EscuelasController {
 //       
 // ==================================================
 
-public async damePersonal(req: Request, res: Response): Promise<void> {
-    const { id } = req.params;
+public async buscarEscuela(req: Request, res: Response): Promise<void> {
+    const { escuela } = req.params;
 
-    pool.query(`call bsp_dame_personal('${id}')`, function(err: any, result: any, fields: any){
+    pool.query(`call bsp_buscar_escuela('${escuela}')`, function(err: any, result: any, fields: any){
         if(err){
             console.log("error", err);
             return;
@@ -20,15 +20,15 @@ public async damePersonal(req: Request, res: Response): Promise<void> {
 }
 
 // ==================================================
-//        Lista planes desde cierto valor
+//        Lista esc desde cierto valor
 // ==================================================
 
-    public async listarPersonal(req: Request, res: Response): Promise<void> {
+public async listarEscuelas(req: Request, res: Response): Promise<void> {
 
         var desde = req.params.desde || 0;
         desde  = Number(desde);
 
-        pool.query(`call bsp_listar_personal('${desde}')`, function(err: any, result: any, fields: any){
+        pool.query(`call bsp_listar_escuelas('${desde}')`, function(err: any, result: any, fields: any){
             if(err){
                 console.log("error", err);
                 return;
@@ -48,35 +48,12 @@ public async getOne(req: Request, res: Response): Promise<any> {
                 console.log("error", err);
                 return;
             }
-            if (result[0][0].Mensaje !== 'El personal no existe!') {
+            if (result[0][0].Mensaje !== 'La escuela no existe!') {
                 return res.json(result[0]);
             }
-            res.status(404).json({ text: "El personal no existe" });
+            res.status(404).json({ text: "La escuela no existe" });
         })
     
-}
-
-// ==================================================
-//        Inserta un personal
-// ==================================================
-
-
-public async create(req: Request, res: Response) {
-
-        var pEscuela = req.body.pEscuela;
-        var pApellidos = req.body.pApellidos;
-        var pNombres = req.body.pNombres;
-        var pDNI = req.body.Descripcion;
-   
-        pool.query(`call bsp_alta_personal('${pEscuela}','${pApellidos}','${pNombres}','${pDNI}')`, function(err: any, result: any, fields: any){
-            if(err){
-                console.log("error", err);
-                return;
-            }
-            res.json({ Mensaje: 'Ok' });
-        })
-
-
 }
 
 

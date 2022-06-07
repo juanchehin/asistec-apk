@@ -1,9 +1,31 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>escuelas</ion-title>
-  </ion-toolbar>
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Escuelas</ion-title>
+    </ion-toolbar>
 </ion-header>
 
+
 <ion-content>
+    <ion-searchbar id="pBusqueda">
+    </ion-searchbar>
+
+    <ion-button type="submit" color="primary" expand="block" (click)="buscar()">
+        Buscar...
+    </ion-button>
+
+    <ion-grid *ngFor="let escuela of escuelas">
+        <ion-row>
+            <ion-col>
+                {{escuela.Escuela}}
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+
+    <ion-button (click)="cambiarDesde(-5) ">Anteriores</ion-button>
+    <ion-button (click)="cambiarDesde(5) ">Siguientes</ion-button>
 
 </ion-content>

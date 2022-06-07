@@ -5,12 +5,14 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { EscuelasPage } from './escuelas.page';
+import { EscuelasPageRoutingModule } from './personal-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule
+    IonicModule,
+    EscuelasPageRoutingModule
   ],
   declarations: [EscuelasPage]
 })
