@@ -18,20 +18,23 @@ const routes: Routes = [
   },
   {
     path: 'asistencias',
-    loadChildren: () => import('./asistencias/asistencias.module').then( m => m.AsistenciasPageModule)
+    loadChildren: () => import('./asistencias/asistencias.module').then( m => m.AsistenciasPageModule),
+    canLoad: [AuthGuardService]
   },
   {
     path: 'personal',
     loadChildren: () => import('./personal/personal.module').then( m => m.PersonalPageModule),
-    canActivate: [AuthGuardService]
+    canLoad: [AuthGuardService]
   },
   {
     path: 'nuevo-personal',
-    loadChildren: () => import('./personal/nuevo-personal/nuevo-personal.module').then( m => m.NuevoPersonalPageModule)
+    loadChildren: () => import('./personal/nuevo-personal/nuevo-personal.module').then( m => m.NuevoPersonalPageModule),
+    canLoad: [AuthGuardService]
   },
   {
     path: 'escuelas',
-    loadChildren: () => import('./escuelas/escuelas.module').then( m => m.EscuelasPageModule)
+    loadChildren: () => import('./escuelas/escuelas.module').then( m => m.EscuelasPageModule),
+    canLoad: [AuthGuardService]
   }
 
 ];
