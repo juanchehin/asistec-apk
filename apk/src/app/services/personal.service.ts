@@ -46,5 +46,14 @@ export class PersonalService {
       );
   }
 
+  // ======================
+  marcarAsistencia(pDNI){
+
+    let url = URL_SERVICIOS + '/asistencias/marcar/' + pDNI;
+
+    return this.http.get(url);
+  }
+
+
 
 }

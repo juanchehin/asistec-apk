@@ -61,14 +61,11 @@ public async getOne(req: Request, res: Response): Promise<any> {
 // ==================================================
 
 
-public async altaAsistencia(req: Request, res: Response) {
+public async marcarAsistencia(req: Request, res: Response) {
 
-        var pEscuela = req.body.pEscuela;
-        var pApellidos = req.body.pApellidos;
-        var pNombres = req.body.pNombres;
-        var pDNI = req.body.Descripcion;
+        var pDNI = req.params.pDNI;
    
-        pool.query(`call bsp_alta_personal('${pEscuela}','${pApellidos}','${pNombres}','${pDNI}')`, function(err: any, result: any, fields: any){
+        pool.query(`call bsp_alta_asistencia('${pDNI}','-')`, function(err: any, result: any, fields: any){
             if(err){
                 console.log("error", err);
                 return;

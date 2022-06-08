@@ -22,24 +22,12 @@
                 {{persona.DNI}}
             </ion-col>
             <ion-col size="2">
-                <ion-button color="success" (click)="marcarAsistencia(persona.IdPersona)">
+                <ion-button color="success" (click)="marcarAsistencia(persona.DNI)">
                     <ion-icon name="checkmark-circle-outline"></ion-icon>
                 </ion-button>
             </ion-col>
         </ion-row>
     </ion-grid>
-
-
-    <!-- <ion-list>
-        <ion-item *ngFor="let persona of personal">
-
-            {{persona.DNI}}
-            <ion-button color="success" (click)="marcarAsistencia(persona.IdPersona)">
-                <ion-icon name="checkmark-circle-outline"></ion-icon>
-            </ion-button>
-        </ion-item>
-
-    </ion-list> -->
 
 
     <ion-button (click)="cambiarDesde(-5) ">Anteriores</ion-button>

@@ -64,9 +64,14 @@ enrutar( ) {
 //  asistencia
 // ==================================================
 
-marcarAsistencia(IdPersona: any ) {
+marcarAsistencia(pDNI: any ) {
 
-  this.router.navigateByUrl("nuevo-personal");
+  this.personalService.marcarAsistencia( pDNI )
+    .subscribe( (resp: any) => {
+
+    console.log("resp en marcar asistencia es : ",resp)
+
+});
 
 }
 
