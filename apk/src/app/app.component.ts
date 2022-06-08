@@ -17,11 +17,9 @@ export class AppComponent {
     { title: 'Personal', url: 'personal', icon: 'people' },
     { title: 'Escuelas', url: 'escuelas', icon: 'school' },
   ];
-  // public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   public labels = [
     { title: 'Logout', url: 'logout', icon: 'log-in-outline' }
   ];
-  // public labels = ['Logout'];
 
   private authSub: Subscription;
   private previousAuthState = false;

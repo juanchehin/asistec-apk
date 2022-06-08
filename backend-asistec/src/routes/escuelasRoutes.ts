@@ -13,7 +13,6 @@ class EscuelasRoutes {
     config(): void {
         this.router.get('/listar/:desde' , escuelasController.listarEscuelas);
         this.router.get('/busqueda/:pBusqueda' , escuelasController.buscarEscuela);
-
     }
 
 }
