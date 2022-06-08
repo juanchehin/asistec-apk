@@ -1,12 +1,10 @@
-import { Injectable, OnDestroy } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, from } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment.prod';
-
-// import { Plugins } from '@capacitor/core';
 import { Storage } from '@capacitor/Storage';
 import { User } from '../models/user.model';
+import { Router } from '@angular/router';
 
 export interface AuthResponseData {
   kind: string;
@@ -63,7 +61,9 @@ export class AuthService {
   //   );
   // }
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private router: Router
+  ) {}
 
 
 // ==================================================
@@ -129,11 +129,14 @@ estaLogueado() {
   }
 
   logout() {
-    if (this.activeLogoutTimer) {
-      clearTimeout(this.activeLogoutTimer);
-    }
-    this._user.next(null);
-    Storage.remove({ key: 'authData' });
+    console.log("pasa logout")
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
+    // if (this.activeLogoutTimer) {
+    //   clearTimeout(this.activeLogoutTimer);
+    // }
+    // this._user.next(null);
+    // Storage.remove({ key: 'authData' });
   }
 
   ngOnDestroy() {

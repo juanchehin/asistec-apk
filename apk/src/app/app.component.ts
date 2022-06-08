@@ -18,14 +18,17 @@ export class AppComponent {
     { title: 'Escuelas', url: 'escuelas', icon: 'school' },
   ];
   // public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  public labels = ['Logout'];
+  public labels = [
+    { title: 'Logout', url: 'logout', icon: 'log-in-outline' }
+  ];
+  // public labels = ['Logout'];
 
   private authSub: Subscription;
   private previousAuthState = false;
 
   constructor(
     private platform: Platform,
-    private authService: AuthService,
+    public authService: AuthService,
     private router: Router,
     private splashScreen: SplashScreen
   ) {
