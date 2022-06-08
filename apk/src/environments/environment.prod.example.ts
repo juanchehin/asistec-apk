@@ -5,7 +5,7 @@
 export const environment = {
   user: '',
   pass: '',
-  URL_SERVICIOS: ''
+  URL_SERVICIOS: 'http://localhost:3000/api'
 };
 
 /*
