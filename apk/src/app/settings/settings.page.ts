@@ -27,9 +27,13 @@ cargarSettings(){
     return;
   }
 
-  this.settingsService.cargarSettings( this.form.value.IP );
-
-  this.showAlert("Cargado correctamente");
+  if (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(this.form.value.IP)) {
+    this.settingsService.cargarSettings( this.form.value.IP );
+    this.showAlert("Cargado correctamente");
+  }else{
+    this.showAlert("Ingrese una IP valida");
+    return;
+  }
 
 }
 
