@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Personal } from '../models/personal.model';
+import { AlertController } from '@ionic/angular';
 import { PersonalService } from '../services/personal.service';
 
 @Component({
@@ -14,7 +14,8 @@ export class PersonalPage implements OnInit {
 
   constructor(
     private personalService: PersonalService,
-    private router : Router
+    private router : Router,
+    private alertCtrl: AlertController
   ) { }
 
   ngOnInit() {
@@ -69,7 +70,13 @@ marcarAsistencia(pDNI: any ) {
   this.personalService.marcarAsistencia( pDNI )
     .subscribe( (resp: any) => {
 
-    console.log("resp en marcar asistencia es : ",resp)
+      if(resp.Mensaje === 'Ok')
+      {
+        this.showAlert('Asistencia marcada');
+      }else
+      {
+        this.showAlert('Ocurrio un error');
+      }
 
 });
 
@@ -95,5 +102,16 @@ cambiarDesde( valor: number ) {
   // this.cargarClientes();
 
 }
+
+private showAlert(message: string) {
+  this.alertCtrl
+    .create({
+      header: 'Mensaje',
+      message: message,
+      buttons: ['Okay']
+    })
+    .then(alertEl => alertEl.present());
+}
+
 
 }
