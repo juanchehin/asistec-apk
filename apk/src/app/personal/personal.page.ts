@@ -11,6 +11,7 @@ export class PersonalPage implements OnInit {
 
   personal: any;
   desde = 0;
+  totalPersonal = 0;
 
   constructor(
     private personalService: PersonalService,
@@ -22,12 +23,16 @@ export class PersonalPage implements OnInit {
     this.cargarPersonal();
   }
 
+// ==================================================
+//  Cargar personal
+// ==================================================
   cargarPersonal(){
 
     this.personalService.cargarPersonal( this.desde )
              .subscribe( (resp: any) => {
 
               this.personal = resp[0];
+              this.totalPersonal = resp[1][0].cantPersonal;
 
 
             });
@@ -88,20 +93,25 @@ marcarAsistencia(pDNI: any ) {
 
 cambiarDesde( valor: number ) {
 
-  const desde = this.desde + valor;
+  const desde = this.desde + valor;  // puede ser + o -
 
-  // if ( desde >= this.totalClientes ) {
-  //   return;
-  // }
+  if ( desde  >= this.totalPersonal ) {
+    return;
+  }
 
-  // if ( desde < 0 ) {
-  //   return;
-  // }
+  if ( desde < 0 ) {
+    return;
+  }
 
-  // this.desde += valor;
-  // this.cargarClientes();
+
+  this.desde += valor;
+  this.cargarPersonal();
 
 }
+
+// ==================================================
+//        Mensaje
+// ==================================================
 
 private showAlert(message: string) {
   this.alertCtrl
