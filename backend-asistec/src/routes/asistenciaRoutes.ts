@@ -12,6 +12,7 @@ class AsistenciasRoutes {
 
     config(): void {
         this.router.get('/marcar/:pDNI', asistenciasController.marcarAsistencia);
+        this.router.get('/listar/:desde' , asistenciasController.listarAsistenciasHoy);
     }
 
 }

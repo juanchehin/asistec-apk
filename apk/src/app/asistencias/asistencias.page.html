@@ -1,9 +1,41 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>asistencias</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>Asistencias del dia</ion-title>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-margin">
+    <ion-grid class="ion-margin">
 
+        <ion-row style="border-bottom: groove;">
+            <ion-col>
+                <p>DNI</p>
+            </ion-col>
+            <ion-col>
+                <p>Apellidos</p>
+            </ion-col>
+            <ion-col>
+                <p>Nombres</p>
+            </ion-col>
+        </ion-row>
+        <div *ngFor="let asistencia of asistencias">
+            <ion-row>
+                <ion-col>
+                    {{asistencia.DNI}}
+                </ion-col>
+                <ion-col>
+                    {{asistencia.Apellidos}}
+                </ion-col>
+                <ion-col>
+                    {{asistencia.Nombres}}
+                </ion-col>
+            </ion-row>
+        </div>
+
+    </ion-grid>
 </ion-content>
+
+
+
+<ion-button (click)="cambiarDesde(-15) ">Anteriores</ion-button>
+<ion-button (click)="cambiarDesde(15) ">Siguientes</ion-button>

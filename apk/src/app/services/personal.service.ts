@@ -54,6 +54,14 @@ export class PersonalService {
     return this.http.get(url);
   }
 
+    // ======================
+    cargarAsistenciasHoy(pDesde){
+
+      let url = URL_SERVICIOS + '/asistencias/listar/' + pDesde;
+
+      return this.http.get(url);
+    }
+
 
 
 }
