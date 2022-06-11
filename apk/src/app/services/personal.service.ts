@@ -2,8 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.prod';
 import { Personal } from 'src/app/models/personal.model';
-
-const URL_SERVICIOS = environment.URL_SERVICIOS;
+import { SettingsService } from './settings.service';
 
 
 @Injectable({
@@ -12,9 +11,12 @@ const URL_SERVICIOS = environment.URL_SERVICIOS;
 export class PersonalService {
 
   token!: any;
+  URL_SERVICIOS = `http://${this.settingsService.IP}:3000/api`;
+
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private settingsService: SettingsService
   ) { }
 
   // ======================
@@ -22,7 +24,9 @@ export class PersonalService {
 
     desde = desde || 0;
 
-    let url = URL_SERVICIOS + '/personal/listar/' + desde;
+    console.log("URL_SERVICIOS : ",this.URL_SERVICIOS)
+
+    let url = this.URL_SERVICIOS + '/personal/listar/' + desde;
 
     return this.http.get(url);
   }
@@ -30,7 +34,7 @@ export class PersonalService {
 // ======================
   buscarPersonal(pBusqueda){
 
-    let url = URL_SERVICIOS + '/personal/busqueda/' + pBusqueda;
+    let url = this.URL_SERVICIOS + '/personal/busqueda/' + pBusqueda;
 
     return this.http.get(url);
   }
@@ -38,7 +42,7 @@ export class PersonalService {
   // ======================
   crearPersonal(personal: Personal){
 
-    let url = URL_SERVICIOS + '/personal/nuevo';
+    let url = this.URL_SERVICIOS + '/personal/nuevo';
 
     return this.http.post(
       url,
@@ -49,7 +53,7 @@ export class PersonalService {
   // ======================
   marcarAsistencia(pDNI){
 
-    let url = URL_SERVICIOS + '/asistencias/marcar/' + pDNI;
+    let url = this.URL_SERVICIOS + '/asistencias/marcar/' + pDNI;
 
     return this.http.get(url);
   }

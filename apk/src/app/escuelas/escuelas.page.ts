@@ -9,6 +9,7 @@ import { EscuelasService } from '../services/escuelas.service';
 export class EscuelasPage implements OnInit {
   desde: number;
   escuelas: any;
+  totalEscuelas = 0;
 
   constructor(
     private escuelasService: EscuelasService,
@@ -29,7 +30,6 @@ buscar( ) {
   const inputElement: HTMLInputElement = document.getElementById('pBusqueda') as HTMLInputElement;
   const pBusqueda: any = inputElement.value || null;
 
-
   this.escuelasService.buscarEscuela( pBusqueda )
           .subscribe( (resp: any) => {
 
@@ -43,37 +43,32 @@ buscar( ) {
 //
 // ==================================================
 cargarEscuelas(){
-
-  console.log("escuelas ")
   this.escuelasService.cargarEscuelas( this.desde )
            .subscribe( (resp: any) => {
 
             this.escuelas = resp[0];
 
-            console.log("escuelas es : ",this.escuelas)
-
-
           });
 }
 
-  // ==================================================
+// ==================================================
 //        Cambio de valor
 // ==================================================
 
 cambiarDesde( valor: number ) {
 
-  const desde = this.desde + valor;
+  const desde = this.desde + valor;  // puede ser + o -
 
-  // if ( desde >= this.totalClientes ) {
-  //   return;
-  // }
+  if ( desde  >= this.totalEscuelas ) {
+    return;
+  }
 
-  // if ( desde < 0 ) {
-  //   return;
-  // }
+  if ( desde < 0 ) {
+    return;
+  }
 
-  // this.desde += valor;
-  // this.cargarClientes();
+  this.desde += valor;
+  this.cargarEscuelas();
 
 }
 

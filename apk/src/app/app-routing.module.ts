@@ -35,7 +35,11 @@ const routes: Routes = [
     path: 'escuelas',
     loadChildren: () => import('./escuelas/escuelas.module').then( m => m.EscuelasPageModule),
     canLoad: [AuthGuardService]
+  },  {
+    path: 'settings',
+    loadChildren: () => import('./settings/settings.module').then( m => m.SettingsPageModule)
   }
+
 
 ];
 
