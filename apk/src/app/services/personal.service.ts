@@ -61,7 +61,7 @@ export class PersonalService {
     // ======================
     cargarAsistenciasHoy(pDesde){
 
-      let url = URL_SERVICIOS + '/asistencias/listar/' + pDesde;
+      let url = this.URL_SERVICIOS + '/asistencias/listar/' + pDesde;
 
       return this.http.get(url);
     }
