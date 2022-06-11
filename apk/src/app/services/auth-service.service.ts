@@ -5,6 +5,7 @@ import { environment } from '../../environments/environment.prod';
 import { Storage } from '@capacitor/Storage';
 import { User } from '../models/user.model';
 import { Router } from '@angular/router';
+import { SettingsService } from './settings.service';
 
 export interface AuthResponseData {
   kind: string;
@@ -62,7 +63,8 @@ export class AuthService {
   // }
 
   constructor(
-    private router: Router
+    private router: Router,
+    private settingsService: SettingsService
   ) {}
 
 
@@ -81,43 +83,6 @@ estaLogueado() {
   }
 }
 
-  autoLogin() {
-    /*return from(Storage.get({ key: 'authData' })).pipe(
-      map((storedData: any) => {
-        if (!storedData || !storedData.value) {
-          return null;
-        }
-        const parsedData = JSON.parse(storedData.value) as {
-          token: string;
-          tokenExpirationDate: string;
-          userId: string;
-          email: string;
-        };
-        const expirationTime = new Date(parsedData.tokenExpirationDate);
-        if (expirationTime <= new Date()) {
-          return null;
-        }
-        const user = new Personal(
-          parsedData.userId,
-          parsedData.email,
-          parsedData.token,
-          expirationTime
-        );
-        return user;
-      }),
-      tap(user => {
-        if (user) {
-          this._user.next(user);
-          this.autoLogout(user.tokenDuration);
-        }
-      }),
-      map(user => {
-        return !!user;
-      })
-    );*/
-  }
-
-
   login(user: string, password: string) {
     // Chequear con user y pass de drive
     if(user === environment.user && password == environment.pass)
@@ -129,14 +94,9 @@ estaLogueado() {
   }
 
   logout() {
-    console.log("pasa logout")
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
-    // if (this.activeLogoutTimer) {
-    //   clearTimeout(this.activeLogoutTimer);
-    // }
-    // this._user.next(null);
-    // Storage.remove({ key: 'authData' });
+    this.settingsService.limpiarIP();
   }
 
   ngOnDestroy() {

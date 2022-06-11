@@ -14,4 +14,9 @@ cargarSettings(pIP: string){
   this.IP = pIP;
 }
 
+// == Limpia la IP ==
+limpiarIP(){
+  this.IP = null;
+}
+
 }
