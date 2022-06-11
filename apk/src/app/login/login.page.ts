@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth-service.service';
+import { SettingsService } from '../services/settings.service';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,7 @@ export class LoginPage implements OnInit {
 
   constructor(
     private authService: AuthService,
+    private settingsService: SettingsService,
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
     private router : Router
@@ -36,10 +38,16 @@ export class LoginPage implements OnInit {
         // let authObs: boolean;
 
         if (this.authService.login(user, password)) {
-            this.isLoading = false;
-            loadingEl.dismiss();
-            this.router.navigateByUrl("personal");
-
+            if((this.settingsService.IP != undefined) && (this.settingsService.IP != null) && (this.settingsService.IP != 'undefined'))
+            {
+              this.isLoading = false;
+              loadingEl.dismiss();
+              this.router.navigateByUrl("personal");
+            }
+            else {
+              this.showAlert('Debe ingresar la IP desde settings');
+              loadingEl.dismiss();
+            }
         } else {
           this.showAlert('Error de logueo');
           loadingEl.dismiss();
@@ -84,7 +92,7 @@ export class LoginPage implements OnInit {
   private showAlert(message: string) {
     this.alertCtrl
       .create({
-        header: 'Authentication failed',
+        header: 'Mensaje',
         message: message,
         buttons: ['Okay']
       })
