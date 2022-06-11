@@ -33,3 +33,7 @@ npm-debug.log*
 /enviroments
 src/environments/environment.prod.ts
 android
+/resources
+/capacitor.config.ts
+ionic.config.json
+config.xml
