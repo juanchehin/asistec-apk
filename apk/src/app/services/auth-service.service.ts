@@ -3,7 +3,6 @@ import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment.prod';
 import { Storage } from '@capacitor/Storage';
-import { User } from '../models/user.model';
 import { Router } from '@angular/router';
 import { SettingsService } from './settings.service';
 
@@ -73,7 +72,8 @@ export class AuthService {
 // ==================================================
 estaLogueado() {
 
-  this.token = localStorage.getItem('token');
+  // this.token = localStorage.getItem('token');
+  this.token = Storage.get({ key: 'token' });
 
   if ((this.token === 'undefined') || (this.token === null)) {
     return false;
@@ -83,70 +83,32 @@ estaLogueado() {
   }
 }
 
+// ==================================================
+//        Permite saber si un usuario esta logueado
+// ==================================================
   login(user: string, password: string) {
     // Chequear con user y pass de drive
     if(user === environment.user && password == environment.pass)
     {
-      localStorage.setItem('token', 'ciidept-centro' );
+      async () => {
+        await Storage.set({
+          key: 'token',
+          value: 'ciidept-centro',
+        });
+      };
       return true;
     }
     return false;
   }
 
+// ==================================================
+//    Logout
+// ==================================================
   logout() {
-    localStorage.removeItem('token');
+    // localStorage.removeItem('token');
+    Storage.remove({ key: 'token' });
     this.router.navigate(['/login']);
     this.settingsService.limpiarIP();
   }
 
-  ngOnDestroy() {
-    if (this.activeLogoutTimer) {
-      clearTimeout(this.activeLogoutTimer);
-    }
-  }
-
-  private autoLogout(duration: number) {
-    if (this.activeLogoutTimer) {
-      clearTimeout(this.activeLogoutTimer);
-    }
-    this.activeLogoutTimer = setTimeout(() => {
-      this.logout();
-    }, duration);
-  }
-
-  // Guarda los datos del usuario en caso de que este autenticado
-  private setUserData(userData: AuthResponseData) {
-    const expirationTime = new Date(
-      new Date().getTime() + +userData.expiresIn * 1000
-    );
-    const user = new User(
-      userData.localId,
-      userData.user,
-      userData.idToken,
-      expirationTime
-    );
-    this._user.next(user);
-    this.autoLogout(user.tokenDuration);
-    this.storeAuthData(
-      userData.localId,
-      userData.idToken,
-      expirationTime.toISOString(),
-      userData.user
-    );
-  }
-
-  private storeAuthData(
-    userId: string,
-    token: string,
-    tokenExpirationDate: string,
-    user: string
-  ) {
-    const data = JSON.stringify({
-      userId: userId,
-      token: token,
-      tokenExpirationDate: tokenExpirationDate,
-      user: user
-    });
-    Storage.set({ key: 'authData', value: data });
-  }
 }

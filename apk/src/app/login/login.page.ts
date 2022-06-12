@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Form, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
-import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth-service.service';
 import { SettingsService } from '../services/settings.service';
+import { Storage } from '@capacitor/storage';
 
 @Component({
   selector: 'app-login',
@@ -53,33 +53,6 @@ export class LoginPage implements OnInit {
           loadingEl.dismiss();
           // authObs = this.authService.signup(email, password);
         }
-
-        /*if (this.isLogin) {
-          authObs = this.authService.login(email, password);
-        } else {
-          this.showAlert('Error de logueo');
-          // authObs = this.authService.signup(email, password);
-        }
-        authObs.subscribe(
-          resData => {
-            this.isLoading = false;
-            loadingEl.dismiss();
-            this.router.navigateByUrl("/personal");
-          },
-          errRes => {
-            loadingEl.dismiss();
-            const code = errRes.error.error.message;
-            let message = 'Could not sign you up, please try again.';
-            if (code === 'EMAIL_EXISTS') {
-              message = 'This email address exists already!';
-            } else if (code === 'EMAIL_NOT_FOUND') {
-              message = 'E-Mail address could not be found.';
-            } else if (code === 'INVALID_PASSWORD') {
-              message = 'This password is not correct.';
-            }
-            this.showAlert(message);
-          }
-        );*/
       });
 
 
