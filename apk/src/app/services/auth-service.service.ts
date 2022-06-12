@@ -87,7 +87,7 @@ estaLogueado() {
 //        Permite saber si un usuario esta logueado
 // ==================================================
   login(user: string, password: string) {
-    // Chequear con user y pass de drive
+
     if(user === environment.user && password == environment.pass)
     {
       async () => {
