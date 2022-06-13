@@ -19,12 +19,12 @@ const routes: Routes = [
   {
     path: 'asistencias',
     loadChildren: () => import('./asistencias/asistencias.module').then( m => m.AsistenciasPageModule),
-    canLoad: [AuthGuardService]
+    canActivate: [AuthGuardService]
   },
   {
     path: 'personal',
     loadChildren: () => import('./personal/personal.module').then( m => m.PersonalPageModule),
-    canLoad: [AuthGuardService]
+    canActivate: [AuthGuardService]
   },
   {
     path: 'nuevo-personal',
@@ -34,8 +34,9 @@ const routes: Routes = [
   {
     path: 'escuelas',
     loadChildren: () => import('./escuelas/escuelas.module').then( m => m.EscuelasPageModule),
-    canLoad: [AuthGuardService]
-  },  {
+    canActivate: [AuthGuardService]
+  },
+  {
     path: 'settings',
     loadChildren: () => import('./settings/settings.module').then( m => m.SettingsPageModule)
   }

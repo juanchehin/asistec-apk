@@ -1,10 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { Platform } from '@ionic/angular';
-import { Subscription } from 'rxjs';
 import { AuthService } from './services/auth-service.service';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { Capacitor } from '@capacitor/core';
 
 @Component({
   selector: 'app-root',
@@ -21,36 +16,16 @@ export class AppComponent {
     { title: 'Logout', url: 'logout', icon: 'log-in-outline' }
   ];
 
-  private authSub: Subscription;
-  private previousAuthState = false;
-
   constructor(
-    private platform: Platform,
-    public authService: AuthService,
-    private router: Router,
-    private splashScreen: SplashScreen
+    public authService: AuthService
   ) {
-    this.initializeApp();
   }
 
   initializeApp() {
-    this.platform.ready().then(() => {
-      if(Capacitor.isPluginAvailable('SplashScreen')){
-        this.splashScreen.hide();
-      }
-    });
+
   }
 
   ngOnInit() {
-    this.authSub = this.authService.userIsAuthenticated.subscribe(isAuth => {
-      this.router.navigateByUrl('/login');
-      console.log("isAuth es : ", isAuth);
-      if (!isAuth && this.previousAuthState !== isAuth) {
-        console.log("pasa if : ");
-        this.router.navigateByUrl('/login');
-      }
-      this.previousAuthState = isAuth;
-    });
   }
 
   onLogout() {
@@ -58,8 +33,6 @@ export class AppComponent {
   }
 
   ngOnDestroy() {
-    if (this.authSub) {
-      this.authSub.unsubscribe();
-    }
+
   }
 }

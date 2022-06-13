@@ -1,65 +1,16 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment.prod';
 import { Storage } from '@capacitor/Storage';
 import { Router } from '@angular/router';
 import { SettingsService } from './settings.service';
 
-export interface AuthResponseData {
-  kind: string;
-  idToken: string;
-  user: string;
-  refreshToken: string;
-  localId: string;
-  expiresIn: string;
-  registered?: boolean;
-}
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private _user = new BehaviorSubject<any>(null);
-  private activeLogoutTimer: any;
   token: any;
-
-  get userIsAuthenticated() {
-    return this._user.asObservable().pipe(
-      map(user => {
-        if (user) {
-          return !!user.token;
-        } else {
-          return false;
-        }
-      })
-    );
-  }
-
-  get userId() {
-    return this._user.asObservable().pipe(
-      map(user => {
-        if (user) {
-          return user.id;
-        } else {
-          return null;
-        }
-      })
-    );
-  }
-
-  // get token() {
-  //   return this._user.asObservable().pipe(
-  //     map(user => {
-  //       if (user) {
-  //         return user.token;
-  //       } else {
-  //         return null;
-  //       }
-  //     })
-  //   );
-  // }
 
   constructor(
     private router: Router,
@@ -73,12 +24,14 @@ export class AuthService {
 estaLogueado() {
 
   // this.token = localStorage.getItem('token');
-  this.token = Storage.get({ key: 'token' });
+  Storage.get({ key: 'token' }).then((result) => {
+    this.token = result.value;
+  });
 
-  if ((this.token === 'undefined') || (this.token === null)) {
-    return false;
+  if ((this.token === "ciidept-centro")) {
+    return true;
   } else {
-    return( this.token.length > 5) ? true : false;
+    return false;
 
   }
 }
@@ -90,12 +43,11 @@ estaLogueado() {
 
     if(user === environment.user && password == environment.pass)
     {
-      async () => {
-        await Storage.set({
+      Storage.set({
           key: 'token',
           value: 'ciidept-centro',
         });
-      };
+
       return true;
     }
     return false;
@@ -107,6 +59,7 @@ estaLogueado() {
   logout() {
     // localStorage.removeItem('token');
     Storage.remove({ key: 'token' });
+    this.token = null;
     this.router.navigate(['/login']);
     this.settingsService.limpiarIP();
   }
